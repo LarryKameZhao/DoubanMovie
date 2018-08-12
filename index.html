@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DouBanMovie</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_440195_fw8hsnrso53wstt9.css&#10;">
+    <style>
+
+            *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+            }
+            a{
+                text-decoration: none;
+            }
+            html,body{
+                height: 100%;
+            }
+            body{
+                font-size:12px;
+                line-height:1.2;
+                background-color: #fff;
+                position: relative;
+            }
+            main{
+                height: calc(100vh - 50px);
+                overflow: scroll;
+                -webkit-overflow-scrolling: touch;
+            }
+            main>section{
+                display: none;
+            }
+            main>section:first-child{
+                display:block;
+            }
+            footer{
+                position: absolute;
+                bottom:0;
+                height: 50px;
+                width: 100%;
+               border-top:1px solid #ccc;
+                display: flex;
+            }
+            footer>div{
+                flex:1;
+                text-align: center;
+            }
+            footer>div>span{
+                display:block;
+                padding-top:5px;
+            }
+            footer .active{
+                color:#FF5722;
+            }
+            .item{
+                border-bottom:1px solid #ccc;
+                padding-bottom: 10px;
+                padding-top:10px;
+
+            }
+            .item >a{
+                /* display: block; */
+                display: flex;
+            }
+            .item .cover,
+            .item .cover img{
+                width:70px;
+            }
+            .item .detail{
+                flex:1;
+                padding-left: 10px;
+            }
+            .item .detail h2{
+                font-size: 16px;
+            }
+            .item .detail .extra{
+                color:#999;
+                margin-top:4px;
+            }
+            .item .detail .score{
+                color:#FF5722;
+            }
+  
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+    html,body,main{
+      height: 100%;
+      position: relative;
+    }
+    body{
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    main>section {
+      height: calc(100% - 45px);
+      padding: 10px;
+      background: #fff;
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch; /*ios 上增加弹性*/
+    }
+    main>section{
+      display: none;
+    }
+    main section:first-child{
+      display: block;
+    }
+    .item {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+    .item>a{
+      display: block;
+      display: flex;
+    }
+    .item .cover,
+    .item .cover img{
+      width: 70px;
+    }
+    .item .detail {
+      flex: 1;
+      padding-left: 10px;
+    }
+    .item .detail h2{
+      font-size: 16px;
+    }
+    .item .detail .extra{
+      color: #999;
+      margin-top: 4px;
+    }
+    .item .detail .score{
+      color: #FF5722;
+    }
+    .loading {
+      text-align: center;
+      padding-top: 10px;
+      display: none;
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg);  }
+    }
+    #search {
+      height: calc(100% - 45px);
+    }
+    section .search-area{
+      color: #333;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+    }
+    section .search-area input {
+      width: calc(100% - 50px);
+      padding: 8px;
+      background-color: #eee;
+      border: none;
+      border-radius: 2px;
+      box-shadow: none;
+      outline: none;
+    }
+    section .search-area .button{
+      position: absolute;
+      right: 0;
+      padding: 8px 10px;
+      background: #FF5722;
+      color: #fff;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    .loading .iconfont{
+      display: inline-block;
+      animation: 1s rotate linear infinite;
+    }
+    footer {
+      position: absolute;
+      bottom: 0;
+      height: 45px;
+      width: 100%;
+      border-top: 1px solid #ccc;
+      background-color: #fff;
+      display: flex;
+    }
+    footer>div {
+      flex: 1;
+      font-size: 12px;
+      text-align: center;
+      color: #666;
+      padding-top: 6px;
+    }
+    footer .active{
+      color: #FF5722;
+    }
+    footer>div>span{
+      display: block;
+    } 
+  
+        </style>
+</head>
+<body>
+        <main>
+          <section id="top250">
+            <div class="container">       
+      <!--         <div class="item">
+                <a href="#">
+                  <div class="cover">
+                    <img src="http://img7.doubanio.com/view/movie_poster_cover/spst/public/p513344864.png" alt="">
+                  </div>
+                  <div class="detail">
+                    <h2>霸王别姬</h2>
+                    <div class="extra"><span class="score">9.3分</span> / 1000收藏</div>
+                    <div class="extra">1994 / 剧情、爱情</div>
+                    <div class="extra">导演: 张艺谋</div>
+                    <div class="extra">主演: 张艺谋、张艺谋、张艺谋</div>
+                  </div>
+                </a>
+              </div> -->
+            <div class="item">            <a href="https://movie.douban.com/subject/1292052/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p480747492.jpg" alt="">              </div>              <div class="detail">                <h2>肖申克的救赎</h2>                <div class="extra">1994 / 犯罪、剧情</div>                <div class="extra">导演：弗兰克·德拉邦特</div>                <div class="extra">主演：蒂姆·罗宾斯、摩根·弗里曼、鲍勃·冈顿</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1291546/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1910813120.jpg" alt="">              </div>              <div class="detail">                <h2>霸王别姬</h2>                <div class="extra">1993 / 剧情、爱情、同性</div>                <div class="extra">导演：陈凯歌</div>                <div class="extra">主演：张国荣、张丰毅、巩俐</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1295644/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p511118051.jpg" alt="">              </div>              <div class="detail">                <h2>这个杀手不太冷</h2>                <div class="extra">1994 / 剧情、动作、犯罪</div>                <div class="extra">导演：吕克·贝松</div>                <div class="extra">主演：让·雷诺、娜塔莉·波特曼、加里·奥德曼</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1292720/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p510876377.jpg" alt="">              </div>              <div class="detail">                <h2>阿甘正传</h2>                <div class="extra">1994 / 剧情、爱情</div>                <div class="extra">导演：罗伯特·泽米吉斯</div>                <div class="extra">主演：汤姆·汉克斯、罗宾·怀特、加里·西尼斯</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1292063/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p510861873.jpg" alt="">              </div>              <div class="detail">                <h2>美丽人生</h2>                <div class="extra">1997 / 剧情、喜剧、爱情</div>                <div class="extra">导演：罗伯托·贝尼尼</div>                <div class="extra">主演：罗伯托·贝尼尼、尼可莱塔·布拉斯基、乔治·坎塔里尼</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1292722/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p457760035.jpg" alt="">              </div>              <div class="detail">                <h2>泰坦尼克号</h2>                <div class="extra">1997 / 剧情、爱情、灾难</div>                <div class="extra">导演：詹姆斯·卡梅隆</div>                <div class="extra">主演：莱昂纳多·迪卡普里奥、凯特·温丝莱特、比利·赞恩</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1291561/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1606727862.jpg" alt="">              </div>              <div class="detail">                <h2>千与千寻</h2>                <div class="extra">2001 / 剧情、动画、奇幻</div>                <div class="extra">导演：宫崎骏</div>                <div class="extra">主演：柊瑠美、入野自由、夏木真理</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1295124/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p492406163.jpg" alt="">              </div>              <div class="detail">                <h2>辛德勒的名单</h2>                <div class="extra">1993 / 剧情、历史、战争</div>                <div class="extra">导演：史蒂文·斯皮尔伯格</div>                <div class="extra">主演：连姆·尼森、本·金斯利、拉尔夫·费因斯</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/3541415/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p513344864.jpg" alt="">              </div>              <div class="detail">                <h2>盗梦空间</h2>                <div class="extra">2010 / 剧情、科幻、悬疑</div>                <div class="extra">导演：克里斯托弗·诺兰</div>                <div class="extra">主演：莱昂纳多·迪卡普里奥、约瑟夫·高登-莱维特、艾伦·佩吉</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/2131459/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1461851991.jpg" alt="">              </div>              <div class="detail">                <h2>机器人总动员</h2>                <div class="extra">2008 / 爱情、科幻、动画</div>                <div class="extra">导演：安德鲁·斯坦顿</div>                <div class="extra">主演：本·贝尔特、艾丽莎·奈特、杰夫·格尔林</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/3011091/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p524964016.jpg" alt="">              </div>              <div class="detail">                <h2>忠犬八公的故事</h2>                <div class="extra">2009 / 剧情</div>                <div class="extra">导演：拉斯·霍尔斯道姆</div>                <div class="extra">主演：理查·基尔、萨拉·罗默尔、琼·艾伦</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/3793023/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p579729551.jpg" alt="">              </div>              <div class="detail">                <h2>三傻大闹宝莱坞</h2>                <div class="extra">2009 / 剧情、喜剧、爱情</div>                <div class="extra">导演：拉吉库马尔·希拉尼</div>                <div class="extra">主演：阿米尔·汗、卡琳娜·卡普尔、马达范</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1292001/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p511146807.jpg" alt="">              </div>              <div class="detail">                <h2>海上钢琴师</h2>                <div class="extra">1998 / 剧情、音乐</div>                <div class="extra">导演：朱塞佩·托纳多雷</div>                <div class="extra">主演：蒂姆·罗斯、普路特·泰勒·文斯、比尔·努恩</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1291549/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1910824951.jpg" alt="">              </div>              <div class="detail">                <h2>放牛班的春天</h2>                <div class="extra">2004 / 剧情、音乐</div>                <div class="extra">导演：克里斯托夫·巴拉蒂</div>                <div class="extra">主演：热拉尔·朱尼奥、让-巴蒂斯特·莫尼耶、弗朗索瓦·贝莱昂</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1292213/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p2455050536.jpg" alt="">              </div>              <div class="detail">                <h2>大话西游之大圣娶亲</h2>                <div class="extra">1995 / 喜剧、爱情、奇幻</div>                <div class="extra">导演：刘镇伟</div>                <div class="extra">主演：周星驰、吴孟达、朱茵</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1292064/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p479682972.jpg" alt="">              </div>              <div class="detail">                <h2>楚门的世界</h2>                <div class="extra">1998 / 剧情、科幻</div>                <div class="extra">导演：彼得·威尔</div>                <div class="extra">主演：金·凯瑞、劳拉·琳妮、艾德·哈里斯</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1291841/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2190556185.jpg" alt="">              </div>              <div class="detail">                <h2>教父</h2>                <div class="extra">1972 / 剧情、犯罪</div>                <div class="extra">导演：弗朗西斯·福特·科波拉</div>                <div class="extra">主演：马龙·白兰度、阿尔·帕西诺、詹姆斯·肯恩</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1291560/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p537668599.jpg" alt="">              </div>              <div class="detail">                <h2>龙猫</h2>                <div class="extra">1988 / 动画、奇幻、冒险</div>                <div class="extra">导演：宫崎骏</div>                <div class="extra">主演：日高法子、坂本千夏、糸井重里</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1889243/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2206088801.jpg" alt="">              </div>              <div class="detail">                <h2>星际穿越</h2>                <div class="extra">2014 / 剧情、科幻、冒险</div>                <div class="extra">导演：克里斯托弗·诺兰</div>                <div class="extra">主演：马修·麦康纳、安妮·海瑟薇、杰西卡·查斯坦</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/5912992/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p1363250216.jpg" alt="">              </div>              <div class="detail">                <h2>熔炉</h2>                <div class="extra">2011 / 剧情</div>                <div class="extra">导演：黄东赫</div>                <div class="extra">主演：孔侑、郑有美、金志映</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1307914/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p2233971046.jpg" alt="">              </div>              <div class="detail">                <h2>无间道</h2>                <div class="extra">2002 / 剧情、犯罪、悬疑</div>                <div class="extra">导演：刘伟强、麦兆辉</div>                <div class="extra">主演：刘德华、梁朝伟、黄秋生</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/6786002/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1454261925.jpg" alt="">              </div>              <div class="detail">                <h2>触不可及</h2>                <div class="extra">2011 / 剧情、喜剧</div>                <div class="extra">导演：奥利维埃·纳卡什、埃里克·托莱达诺</div>                <div class="extra">主演：弗朗索瓦·克鲁塞、奥玛·希、安娜·勒尼</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1300267/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1963126880.jpg" alt="">              </div>              <div class="detail">                <h2>乱世佳人</h2>                <div class="extra">1939 / 剧情、历史、爱情</div>                <div class="extra">导演：维克多·弗莱明、乔治·库克、山姆·伍德</div>                <div class="extra">主演：费雯·丽、克拉克·盖博、奥利维娅·德哈维兰</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1849031/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1312700744.jpg" alt="">              </div>              <div class="detail">                <h2>当幸福来敲门</h2>                <div class="extra">2006 / 剧情、传记、家庭</div>                <div class="extra">导演：加布里埃莱·穆奇诺</div>                <div class="extra">主演：威尔·史密斯、贾登·史密斯、坦迪·牛顿</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/3319755/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p663036666.jpg" alt="">              </div>              <div class="detail">                <h2>怦然心动</h2>                <div class="extra">2010 / 剧情、喜剧、爱情</div>                <div class="extra">导演：罗伯·莱纳</div>                <div class="extra">主演：玛德琳·卡罗尔、卡兰·麦克奥利菲、瑞贝卡·德·莫妮</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1291828/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1910901025.jpg" alt="">              </div>              <div class="detail">                <h2>天堂电影院</h2>                <div class="extra">1988 / 剧情、爱情</div>                <div class="extra">导演：朱塞佩·托纳多雷</div>                <div class="extra">主演：安东内拉·阿蒂利、恩佐·卡拉瓦勒、艾萨·丹尼埃利</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/25662329/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p2315672647.jpg" alt="">              </div>              <div class="detail">                <h2>疯狂动物城</h2>                <div class="extra">2016 / 喜剧、动画、冒险</div>                <div class="extra">导演：拜伦·霍华德、瑞奇·摩尔、杰拉德·布什</div>                <div class="extra">主演：金妮弗·古德温、杰森·贝特曼、伊德里斯·艾尔巴</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1293182/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2173577632.jpg" alt="">              </div>              <div class="detail">                <h2>十二怒汉</h2>                <div class="extra">1957 / 剧情</div>                <div class="extra">导演：西德尼·吕美特</div>                <div class="extra">主演：亨利·方达、马丁·鲍尔萨姆、约翰·菲德勒</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1851857/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p462657443.jpg" alt="">              </div>              <div class="detail">                <h2>蝙蝠侠：黑暗骑士</h2>                <div class="extra">2008 / 剧情、动作、科幻</div>                <div class="extra">导演：克里斯托弗·诺兰</div>                <div class="extra">主演：克里斯蒂安·贝尔、希斯·莱杰、艾伦·艾克哈特</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1291858/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1181775734.jpg" alt="">              </div>              <div class="detail">                <h2>鬼子来了</h2>                <div class="extra">2000 / 剧情、历史、战争</div>                <div class="extra">导演：姜文</div>                <div class="extra">主演：姜文、香川照之、袁丁</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1929463/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1784592701.jpg" alt="">              </div>              <div class="detail">                <h2>少年派的奇幻漂流</h2>                <div class="extra">2012 / 剧情、奇幻、冒险</div>                <div class="extra">导演：李安</div>                <div class="extra">主演：苏拉·沙玛、伊尔凡·可汗、拉菲·斯波</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1292365/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2513253791.jpg" alt="">              </div>              <div class="detail">                <h2>活着</h2>                <div class="extra">1994 / 剧情、历史、家庭</div>                <div class="extra">导演：张艺谋</div>                <div class="extra">主演：葛优、巩俐、姜武</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1292000/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p1910926158.jpg" alt="">              </div>              <div class="detail">                <h2>搏击俱乐部</h2>                <div class="extra">1999 / 剧情、动作、悬疑</div>                <div class="extra">导演：大卫·芬奇</div>                <div class="extra">主演：爱德华·诺顿、布拉德·皮特、海伦娜·伯翰·卡特</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1291552/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p1910825503.jpg" alt="">              </div>              <div class="detail">                <h2>指环王3：王者无敌</h2>                <div class="extra">2003 / 剧情、动作、奇幻</div>                <div class="extra">导演：彼得·杰克逊</div>                <div class="extra">主演：维果·莫腾森、伊莱贾·伍德、西恩·奥斯汀</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1291583/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p1446261379.jpg" alt="">              </div>              <div class="detail">                <h2>天空之城</h2>                <div class="extra">1986 / 动画、奇幻、冒险</div>                <div class="extra">导演：宫崎骏</div>                <div class="extra">主演：田中真弓、横泽启子、初井言荣</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1299398/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p1280323646.jpg" alt="">              </div>              <div class="detail">                <h2>大话西游之月光宝盒</h2>                <div class="extra">1995 / 喜剧、爱情、奇幻</div>                <div class="extra">导演：刘镇伟</div>                <div class="extra">主演：周星驰、吴孟达、罗家英</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/2129039/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2364094053.jpg" alt="">              </div>              <div class="detail">                <h2>飞屋环游记</h2>                <div class="extra">2009 / 剧情、喜剧、动画</div>                <div class="extra">导演：彼特·道格特、鲍勃·彼德森</div>                <div class="extra">主演：爱德华·阿斯纳、克里斯托弗·普卢默、乔丹·长井</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1296141/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p1505392928.jpg" alt="">              </div>              <div class="detail">                <h2>控方证人</h2>                <div class="extra">1957 / 剧情、犯罪、悬疑</div>                <div class="extra">导演：比利·怀德</div>                <div class="extra">主演：泰隆·鲍华、玛琳·黛德丽、查尔斯·劳顿</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1293839/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2189265085.jpg" alt="">              </div>              <div class="detail">                <h2>罗马假日</h2>                <div class="extra">1953 / 喜剧、剧情、爱情</div>                <div class="extra">导演：威廉·惠勒</div>                <div class="extra">主演：奥黛丽·赫本、格利高里·派克、埃迪·艾伯特</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/1900841/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p1808872109.jpg" alt="">              </div>              <div class="detail">                <h2>窃听风暴</h2>                <div class="extra">2006 / 剧情、悬疑</div>                <div class="extra">导演：弗洛里安·亨克尔·冯·多纳斯马尔克</div>                <div class="extra">主演：乌尔里希·穆埃、马蒂娜·格德克、塞巴斯蒂安·科赫</div>                <div class="extra"></div>              </div>            </a>          </div></div>
+            <div class="loading" style="display: none;"><span class="iconfont icon-loading"></span></div>
+          </section>
+          <section id="beimei">
+            <div class="container">
+            
+            <div class="item">            <a href="https://movie.douban.com/subject/26336252/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2529365085.jpg" alt="">              </div>              <div class="detail">                <h2>碟中谍6：全面瓦解</h2>                <div class="extra">2018 / 动作、惊悚、冒险</div>                <div class="extra">导演：克里斯托弗·麦奎里</div>                <div class="extra">主演：汤姆·克鲁斯、亨利·卡维尔、文·瑞姆斯</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/26359235/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2523016274.jpg" alt="">              </div>              <div class="detail">                <h2>克里斯托弗·罗宾</h2>                <div class="extra">2018 / 喜剧、动画、冒险</div>                <div class="extra">导演：马克·福斯特</div>                <div class="extra">主演：海莉·阿特维尔、伊万·麦克格雷格、克里斯·奥多德</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/26999424/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p2528109179.jpg" alt="">              </div>              <div class="detail">                <h2>我的间谍前男友</h2>                <div class="extra">2018 / 喜剧、动作</div>                <div class="extra">导演：苏珊娜·福格尔</div>                <div class="extra">主演：米拉·库尼斯、凯特·麦克金农、贾斯汀·塞洛克斯</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/27050259/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2528272481.jpg" alt="">              </div>              <div class="detail">                <h2>妈妈咪呀2</h2>                <div class="extra">2018 / 喜剧、爱情、歌舞</div>                <div class="extra">导演：欧·帕克</div>                <div class="extra">主演：莉莉·詹姆斯、阿曼达·塞弗里德、朱丽·沃特斯</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/26356631/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2519696600.jpg" alt="">              </div>              <div class="detail">                <h2>伸冤人2</h2>                <div class="extra">2018 / 动作、犯罪、惊悚</div>                <div class="extra">导演：安东尼·福奎阿</div>                <div class="extra">主演：丹泽尔·华盛顿、佩德罗·帕斯卡、艾什顿·桑德斯</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/26630714/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2530591543.jpg" alt="">              </div>              <div class="detail">                <h2>精灵旅社3：疯狂假期</h2>                <div class="extra">2018 / 喜剧、动画、奇幻</div>                <div class="extra">导演：格恩迪·塔塔科夫斯基</div>                <div class="extra">主演：亚当·桑德勒、凯瑟琳·哈恩、史蒂夫·布西密</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/26636712/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p2529389608.jpg" alt="">              </div>              <div class="detail">                <h2>蚁人2：黄蜂女现身</h2>                <div class="extra">2018 / 动作、科幻、冒险</div>                <div class="extra">导演：佩顿·里德</div>                <div class="extra">主演：保罗·路德、伊万杰琳·莉莉、迈克尔·佩纳</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/26288143/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2525729485.jpg" alt="">              </div>              <div class="detail">                <h2>黑暗心灵</h2>                <div class="extra">2018 / 科幻、惊悚</div>                <div class="extra">导演：吕寅荣</div>                <div class="extra">主演：阿曼德拉·斯坦伯格 、曼迪·摩尔、格温多兰·克里斯蒂</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/25849049/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2522880251.jpg" alt="">              </div>              <div class="detail">                <h2>超人总动员2</h2>                <div class="extra">2018 / 喜剧、动作、动画</div>                <div class="extra">导演：布拉德·伯德</div>                <div class="extra">主演：格雷格·T·尼尔森、霍利·亨特、莎拉·沃威尔</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/27165968/">              <div class="cover">                <img src="http://img3.doubanio.com/view/photo/s_ratio_poster/public/p2513656628.jpg" alt="">              </div>              <div class="detail">                <h2>少年泰坦出击电影版</h2>                <div class="extra">2018 / 喜剧、动作、动画</div>                <div class="extra">导演：亚伦·霍瓦斯、皮得·里达·米切尔</div>                <div class="extra">主演：尼古拉斯·凯奇、克里斯汀·贝尔、威尔·阿奈特</div>                <div class="extra"></div>              </div>            </a>          </div><div class="item">            <a href="https://movie.douban.com/subject/26416062/">              <div class="cover">                <img src="http://img7.doubanio.com/view/photo/s_ratio_poster/public/p2522069454.jpg" alt="">              </div>              <div class="detail">                <h2>侏罗纪世界2</h2>                <div class="extra">2018 / 动作、科幻、冒险</div>                <div class="extra">导演：胡安·安东尼奥·巴亚纳</div>                <div class="extra">主演：克里斯·帕拉特、布莱丝·达拉斯·霍华德、贾斯蒂斯·史密斯</div>                <div class="extra"></div>              </div>            </a>          </div></div>
+            <div class="loading"><span class="iconfont icon-loading"></span></div>
+          </section>
+          <section id="search">
+            <div class="wrap">
+              <div class="search-area">
+                <input type="text" placeholder="搜索电影"><span class="button"> 搜索</span>
+              </div>
+              <div class="search-result">
+                <div class="container"></div>
+                <div class="loading"><span class="iconfont icon-loading"></span> </div>
+              </div>        
+            </div>
+      
+          </section>
+        </main>
+        <footer>
+          <div class="active">
+            <span class="iconfont icon-paihang"></span><span>Top250</span>
+          </div>
+          <div>
+            <span class="iconfont icon-beimei"></span><span>北美</span>
+          </div>
+          <div>
+            <span class="iconfont icon-search"></span><span>搜索</span>
+          </div>
+       
+        </footer>
+        
+        <script>
+      
+          var Helpers = {
+            isToBottom: function($viewport, $content) {
+              return $viewport.height() + $viewport.scrollTop() + 30 > $content.height() 
+            },
+      
+            createNode: function(subject){
+                var $node = $('<div class="item">\
+                  <a href="#">\
+                    <div class="cover">\
+                      <img src="" alt="">\
+                    </div>\
+                    <div class="detail">\
+                      <h2></h2>\
+                      <div class="extra"><span class="score"></span> / <span class="collection"></span>收藏</div>\
+                      <div class="extra"></div>\
+                      <div class="extra"></div>\
+                      <div class="extra"></div>\
+                    </div>\
+                  </a>\
+                </div>')
+                $node.find('a').attr('href', subject.alt)    
+                $node.find('.cover img').attr('src', subject.images.small)
+                $node.find('.detail h2').text(subject.title)   
+                $node.find('.detail .score').text(subject.rating.average)  
+                $node.find('.detail .collection').text(subject.collect_count)  
+                $node.find('.detail .extra').eq(0).text(subject.year + ' / ' + subject.genres.join('、')) 
+                $node.find('.detail .extra').eq(1).text('导演：' + subject.directors.map(v=>v.name).join('、'))  
+                $node.find('.detail .extra').eq(2).text('主演：' + subject.casts.map(v=>v.name).join('、'))    
+                //console.log(_this.$container)
+                return $node
+            }
+          }
+      
+      
+          var Paging = {
+            init: function(){
+              this.$tabs = $('footer>div')
+              this.$pages = $('main>section')
+              this.bind()
+            },
+            bind: function(){
+              var _this = this
+              this.$tabs.on('click', function(){
+                var $this = $(this)
+                var index = $this.index()
+                $this.addClass('active')
+                  .siblings().removeClass('active')
+                _this.$pages.eq(index).fadeIn().siblings().fadeOut()
+              })
+            }
+          }
+      
+          var Top250 = {
+            init: function(){
+              var _this = this
+              this.$container = $('#top250')
+              this.$content = this.$container.find('.container')
+              this.page = 0
+              this.count = 10
+              this.isFinshed = false
+              this.isLoading = false
+              this.bind()
+              this.getData(function(data){
+                _this.renderData(data)
+                _this.page++
+              })
+            },
+            bind: function(){
+              var _this = this
+      
+              this.$container.on('scroll', function(){
+                console.log(_this.isLoading)
+                if(Helpers.isToBottom(_this.$container, _this.$content) && !_this.isFinshed && !_this.isLoading){
+                  console.log('to bottom')
+                  _this.getData(function(data){
+                    _this.renderData(data)
+                    _this.page++
+                    if(_this.page * _this.count > data.total) {
+                      _this.isFinshed = true
+                    }
+                  })
+                }
+                // if(_this.clock){
+                //   clearTimeout(_this.clock)
+                // }
+                // _this.clock = setTimeout(function(){
+                //   console.log('scroll...')
+      
+                // }, 100)
+              })
+            },
+            getData: function(callback){
+              var _this = this
+              this.isLoading = true
+              this.$container.find('.loading').show(400)
+              $.ajax({
+                url: '//api.douban.com/v2/movie/top250',
+                data: {
+                  start: this.count*this.page,
+                  count: this.count
+                },
+                dataType: 'jsonp'
+              }).done(function(ret){
+                _this.isLoading = false
+                _this.$container.find('.loading').hide(400)
+                callback(ret)
+              })
+            },
+            renderData(data){
+              var _this = this
+              data.subjects.forEach(function(item){
+                var $node = Helpers.createNode(item)
+                _this.$content.append($node)    
+              })
+            }
+      
+          }
+      
+          var UsBoard = {
+            init: function(){
+              var _this = this
+              this.$container = $('#beimei')
+              this.$content = this.$container.find('.container')
+              this.getData(function(data){
+                _this.renderData(data)
+              })
+            },
+            getData: function(callback){
+              $.ajax({
+                url: '//api.douban.com/v2/movie/us_box',
+                data: {
+                  start: 0,
+                  count: 10
+                },
+                dataType: 'jsonp'
+              }).done(function(ret){
+                callback(ret)
+              })
+            },
+            renderData(data){
+              var _this = this
+              console.log(data)
+              data.subjects.forEach(function(item){
+                var $node = Helpers.createNode(item.subject)  
+                _this.$content.append($node)    
+              })
+            }
+      
+          }
+      
+          var Search = {
+            init: function() {
+              this.page = 0
+              this.count = 10
+              this.isFinshed = false
+              this.isLoading = false
+              this.$container = $('#search')
+              this.$content = this.$container.find('.container')
+              this.bind()
+            },
+      
+            bind: function() {
+              var _this = this
+              this.$container.find('.search-area .button').on('click', function(){
+                console.log('click ')
+                _this.getData(function(data){
+                  console.log(data)
+                  _this.renderData(data)
+                })
+              })
+              console.log(this.$container.find('.search-area input'))
+              this.$container.find('.search-area input').on('keyup', function(e){
+                if(e.key === 'Enter') {
+                  _this.getData(function(data){
+                  _this.renderData(data)
+                })
+                }
+              })
+      
+              this.$container.on('scroll', function(){
+                console.log(_this.isLoading)
+                if(Helpers.isToBottom(_this.$container, _this.$container.find('.wrap')) && !_this.isFinshed && !_this.isLoading){
+                  console.log('to bottom')
+                  _this.getData(function(data){
+                    _this.renderData(data)
+                    _this.page++
+                    if(_this.page * _this.count > data.total) {
+                      _this.isFinshed = true
+                    }
+                  })
+                }
+              })
+            },
+      
+            getData: function(callback){
+              var _this = this
+              var keyword = this.$container.find('.search-area input').val()
+              this.isLoading = true
+              $.ajax({
+                url: 'http://api.douban.com/v2/movie/search',
+                data: {
+                  q: keyword
+                },
+                dataType: 'jsonp'
+              }).done(function(ret){
+                _this.isLoading = false
+                callback(ret)
+              })
+            },
+      
+            renderData(data){
+              var _this = this
+              data.subjects.forEach(function(item){
+                var $node = Helpers.createNode(item)
+                _this.$content.append($node)    
+              })
+            }
+          }
+      
+      
+      
+      
+          var App = {
+            init: function(){
+              Paging.init()
+              Top250.init()
+              UsBoard.init()
+              Search.init()
+            }
+          }
+      
+          App.init()
+      
+      
+      
+      
+          // $('footer>div').on('click', function(){
+          //   $(this).addClass('active').siblings().removeClass('active')
+          //   var index = $(this).index()
+          //   $('main section').eq(index).fadeIn().siblings().fadeOut()
+          // })
+          
+          
+        </script>
+      
+      </body>
+</html>
