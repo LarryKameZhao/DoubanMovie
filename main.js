@@ -193,7 +193,7 @@
           var keyword = this.$container.find('.search-area input').val()
           this.isLoading = true
           $.ajax({
-            url: '//api.douban.com/v2/movie/search',
+            url: 'https://api.douban.com/v2/movie/search',
             data: {
               q: keyword
             },
