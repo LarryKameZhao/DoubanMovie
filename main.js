@@ -90,7 +90,7 @@
           this.isLoading = true
           this.$container.find('.loading').show(400)
           $.ajax({
-            url: '//api.douban.com/v2/movie/top250',
+            url: 'http://api.douban.com/v2/movie/top250',
             data: {
               start: this.count*this.page,
               count: this.count
@@ -123,7 +123,7 @@
         },
         getData: function(callback){
           $.ajax({
-            url: '//api.douban.com/v2/movie/us_box',
+            url: 'http://api.douban.com/v2/movie/us_box',
             data: {
               start: 0,
               count: 10
@@ -193,7 +193,7 @@
           var keyword = this.$container.find('.search-area input').val()
           this.isLoading = true
           $.ajax({
-            url: '//api.douban.com/v2/movie/search',
+            url: 'http://api.douban.com/v2/movie/search',
             data: {
               q: keyword
             },
